@@ -1,4 +1,7 @@
 @extends('layout.master-page')
+@section('title')
+    Dashboard
+@endsection
 
 @section('content')
     <main class="content">
