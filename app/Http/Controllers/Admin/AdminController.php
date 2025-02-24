@@ -22,7 +22,6 @@ class AdminController extends Controller
 
         $credentials = ['email' => $email, 'password' => $password];
         if (auth()->attempt($credentials)) {
-            return redirect()->route('admin');
             return response()->json([
                 'success' => true,
                 'message' => 'Bạn đăng nhập thành công.',

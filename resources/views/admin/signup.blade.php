@@ -1,64 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-        <link rel="canonical" href="https://demo-basic.adminkit.io/" />
-        <title>Đăng ký</title>
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{date('dmYH', time())}}">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>Đăng nhập</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     </head>
-
-    <body>
-        <main class="d-flex w-100">
-            <div class="container d-flex flex-column">
-                <div class="row vh-100">
-                    <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
-                        <div class="d-table-cell align-middle">
-                            <div class="text-center mt-4">
-                                <h1 class="h2">BẤT ĐỘNG SẢN</h1>
-                                <p class="lead">
-                                    Tạo mới tài khoản của bạn để đăng nhập vào hệ thống
-                                </p>
-                            </div>
-    
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="m-sm-3">
-                                        <form id="formSignUp">
-                                            <div class="mb-3">
-                                                <label class="form-label">Tên</label>
-                                                <input class="form-control form-control-lg" type="text" name="name" placeholder="Nhập tên của bạn"/>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Email</label>
-                                                <input class="form-control form-control-lg" type="email" name="email" placeholder="Nhập email của bạn"/>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Mật khẩu</label>
-                                                <input class="form-control form-control-lg" type="password" name="password" placeholder="Nhập mật khẩu của bạn"/>
-                                            </div>
-                                            <div class="d-grid gap-2">
-                                                <button class="btn btn-lg btn-primary">Đăng ký</button>
-                                            </div>
-                                            <div id="response" class="mt-3"></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center mb-3">
-                                Bạn đã có tài khoản? <a href="{{route('signup')}}">Đăng nhập</a>
-                            </div>
+    <body class="register-page bg-body-secondary">
+        <div class="login-box">
+            <div class="login-logo">
+                <b>BẤT ĐỘNG SẢN</b>
+            </div>
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Đăng ký tài khoản mới</p>
+                    <form id="formSignUp">
+                        <div class="input-group mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Nhập tên của bạn" />
+                            <div class="input-group-text"><span class="bi bi-person"></span></div>
                         </div>
-                    </div>
+                        <div class="input-group mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Nhập email của bạn" />
+                            <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu của bạn" />
+                            <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+                        </div>
+                        <div class="d-grid gap-2 mb-2">
+                            <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        </div>
+                    </form>
+                    <p id="response" class="mb-1"></p>
+                    <p class="mb-0">Bạn đã có tài khoản? <a href="{{route('login')}}" class="text-center">Đăng nhập</a></p>
                 </div>
             </div>
-        </main>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
         <script src="{{ asset('js/main.js') }}"></script>
         <script>
             $(document).ready(function(){
@@ -77,7 +59,7 @@
                             if (response.success == true) {
                                 location.href = '{{route('admin')}}';
                             }else{
-                                $('#response').html('<p style="color: red; font-size:15px">' + response.message + '</p>');
+                                $('#response').html('<p style="color: red; font-size:16px">' + response.message + '</p>');
                             }
                         },
                         error: function(xhr) {

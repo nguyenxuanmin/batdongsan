@@ -5,10 +5,14 @@ use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\LoginAuth;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BlogController;
 
 Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('logout');
+    Route::get('/blog', [BlogController::class, 'index'])->name('list_blog');
+    Route::get('/add-blog', [BlogController::class, 'main'])->name('add_blog');
+    Route::post('/add-blog', [BlogController::class, 'add'])->name('add_blog');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');
