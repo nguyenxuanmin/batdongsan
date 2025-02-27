@@ -42,8 +42,8 @@ class AdminService
             return $message;
         }
 
-        if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif") {
-            $message = "Xin lỗi, chỉ các tệp JPG, JPEG, PNG, GIF được phép.";
+        if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif" && $imageFileType != "webp") {
+            $message = "Xin lỗi, chỉ các tệp JPG, JPEG, PNG, GIF, WEBP được phép.";
             return $message;
         }
         

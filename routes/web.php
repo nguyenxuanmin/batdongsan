@@ -11,8 +11,10 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('logout');
     Route::get('/blog', [BlogController::class, 'index'])->name('list_blog');
-    Route::get('/add-blog', [BlogController::class, 'main'])->name('add_blog');
-    Route::post('/add-blog', [BlogController::class, 'add'])->name('add_blog');
+    Route::get('/add-blog', [BlogController::class, 'add'])->name('add_blog');
+    Route::post('/save-blog', [BlogController::class, 'save'])->name('save_blog');
+    Route::post('/delete-blog', [BlogController::class, 'delete'])->name('delete_blog');
+    Route::get('/edit-blog/{id}', [BlogController::class, 'edit'])->name('edit_blog');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');

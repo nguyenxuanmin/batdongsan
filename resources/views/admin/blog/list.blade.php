@@ -21,36 +21,61 @@
     <div class="app-content">
         <div class="container-fluid">
             <div class="mb-3">
-                <a class="btn btn-outline-primary" href="{{route('add_blog')}}" title="Thêm">Thêm</a>
+                <a class="btn btn-outline-primary" href="{{route('add_blog')}}" title="Thêm">Thêm bài viết</a>
             </div>
             <table class="table">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col" width="50px"></th>
-                        <th scope="col" width="100px">STT</th>
-                        <th scope="col" width="200px"></th>
+                        <th scope="col" width="100px" class="text-center">STT</th>
+                        <th scope="col" width="150px"></th>
                         <th scope="col">Tên bài viết</th>
-                        <th scope="col" width="170px">Người tạo</th>
-                        <th scope="col" width="170px">Ngày đăng</th>
+                        <th scope="col" width="200px" class="text-center">Ngày đăng</th>
                         <th scope="col" width="150px">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td valign="middle"><input class="form-check-input" type="checkbox" value="n"></td>
-                        <td valign="middle">1</td>
-                        <td valign="middle"><img src="" alt="" class=""></td>
-                        <td valign="middle">Mark</td>
-                        <td valign="middle">Otto</td>
-                        <td valign="middle">3333</td>
-                        <td valign="middle">
-                            <button class="btn btn-outline-info" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn btn-outline-danger" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>
+                    @if (count($blogs) == 0)
+                        <tr>
+                            <td valign="middle" align="center" colspan="5">Không có dữ liệu</td>
+                        </tr>
+                    @endif
+                    @foreach ($blogs as $key => $blog)
+                        <tr>
+                            <td valign="middle" align="center">{{$key+1}}</td>
+                            <td valign="middle"><img src="{{asset('library/blog/'.$blog->image)}}" alt="{{$blog->name}}" class="w-75"></td>
+                            <td valign="middle">{{$blog->name}}</td>
+                            <td valign="middle" align="center">{{$blog->created_at->format('d/m/Y');}}</td>
+                            <td valign="middle">
+                                <a href="{{route('edit_blog',[$blog->id])}}" class="btn btn-outline-info" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <button class="btn btn-outline-danger" title="Xóa" onclick="delete_blog({{$blog->id}});"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
-            @include('admin.layout.panigation')
+            {{$blogs->links('admin.layout.pagination')}}
         </div>
     </div>
+    <script>
+        function delete_blog(id){
+            let result  = confirm("Bạn có muốn xóa bài viết?");
+            if (result) {
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    url: '{{ route('delete_blog') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    type: 'POST',
+                    data: {id: id},
+                    success: function(response) {
+                        location.href = '{{route('list_blog')}}';
+                    },
+                    error: function(xhr) {
+                        console.log(xhr);
+                    }
+                });
+            }
+        }
+    </script>
 @endsection
