@@ -11,11 +11,11 @@
                 <div class="col-sm-6"><h3 class="mb-0">{{$title_page}}</h3></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                      <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-                      <li class="breadcrumb-item"><a href="{{route('list_blog')}}">Tin tức</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">{{$title_page}}</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('list_blog')}}">Tin tức</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$title_page}}</li>
                     </ol>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -106,5 +106,4 @@
             });
         });
     </script>
-    
 @endsection
