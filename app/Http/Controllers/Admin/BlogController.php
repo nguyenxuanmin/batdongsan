@@ -9,24 +9,53 @@ use App\Services\AdminService;
 
 class BlogController extends Controller
 {
-    protected $adminService;
-
     public function __construct()
     {
         $this->adminService = new AdminService;
+        $this->currentUrl = $_SERVER['REQUEST_URI'];
+        $this->listTagTable = ["news","about_us"];
+        $this->tagTable = $this->adminService->getTagName($this->currentUrl,$this->listTagTable);
     }
 
     public function index(){
-        $blogs = Blog::OrderBy('created_at','desc')->paginate(20);
-        return view('admin.blog.list',['blogs' => $blogs]);
+        switch ($this->tagTable) {
+            case 'news':
+                $pageName = "Tin tức";
+                break;
+            case 'about_us':
+                $pageName = "Về chúng tôi";
+                break;
+            default:
+                $pageName = "";
+                break;
+        }
+        $blogs = Blog::Where('tag_table',$this->tagTable)->OrderBy('created_at','desc')->paginate(20);
+        return view('admin.blog.list',[
+            'blogs' => $blogs,
+            'pageName' => $pageName,
+            'tagName' => $this->tagTable
+        ]);
     }
 
     public function add(){
         $title_page = "Thêm bài viết";
         $action = "add";
+        switch ($this->tagTable) {
+            case 'news':
+                $pageName = "Tin tức";
+                break;
+            case 'about_us':
+                $pageName = "Về chúng tôi";
+                break;
+            default:
+                $pageName = "";
+                break;
+        }
         return view('admin.blog.main',[
             'title_page' => $title_page,
-            'action' => $action
+            'action' => $action,
+            'pageName' => $pageName,
+            'tagName' => $this->tagTable
         ]);
     }
 
@@ -34,10 +63,23 @@ class BlogController extends Controller
         $title_page = "Sửa bài viết";
         $action = "edit";
         $blog = Blog::find($id);
+        switch ($this->tagTable) {
+            case 'news':
+                $pageName = "Tin tức";
+                break;
+            case 'about_us':
+                $pageName = "Về chúng tôi";
+                break;
+            default:
+                $pageName = "";
+                break;
+        }
         return view('admin.blog.main',[
             'title_page' => $title_page,
             'action' => $action,
-            'blog' => $blog
+            'blog' => $blog,
+            'pageName' => $pageName,
+            'tagName' => $this->tagTable
         ]);
     }
 
@@ -46,8 +88,9 @@ class BlogController extends Controller
         $description = $request->description;
         $image = $_FILES["image"]["name"];
         $content = $request->content;
-        $slug = $this->adminService->generate_slug($title);
+        $slug = $this->adminService->generateSlug($title);
         $action = $request->action;
+        $tagName = $request->tagName;
         if ($title == "") {
             return response()->json([
                 'success' => false,
@@ -63,12 +106,12 @@ class BlogController extends Controller
 
         if ($image != "") {
             if($action == "edit"){
-                $imagePath = public_path('library/blog/' . $blog->image);
+                $imagePath = public_path('library/'.$tagName.'/' . $blog->image);
                 if (file_exists($imagePath)) {
                     unlink($imagePath);
                 }
             }
-            $messageError = $this->adminService->generate_image($_FILES["image"],"library/blog/");
+            $messageError = $this->adminService->generateImage($_FILES["image"],"library/$tagName/");
             if($messageError != ""){
                 return response()->json([
                     'success' => false,
@@ -88,6 +131,7 @@ class BlogController extends Controller
         $blog->description = $description;
         $blog->content = $content;
         $blog->image = $image;
+        $blog->tag_table = $tagName;
         $blog->save();
 
         return response()->json([
@@ -98,7 +142,7 @@ class BlogController extends Controller
 
     public function delete(Request $request){
         $blog = Blog::find($request->id);
-        $imagePath = public_path('library/blog/' . $blog->image);
+        $imagePath = public_path('library/'.$this->tagTable.'/' . $blog->image);
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }

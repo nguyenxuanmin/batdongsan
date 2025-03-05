@@ -1,6 +1,6 @@
 @php
     $currentUrl = $_SERVER['REQUEST_URI'];
-    $list1 = ["blog", "news", "about_us"];
+    $list1 = ["news","about_us"];
     $list2 = ["company"];
     $isFound1 = false;
     $isFound2 = false;
@@ -38,7 +38,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('list_blog')}}" class="nav-link @if (strpos($currentUrl, 'blog') !== false) active @endif">
+                            <a href="{{route('list_news')}}" class="nav-link @if (strpos($currentUrl, 'news') !== false) active @endif">
                                 <i class="nav-icon fa-solid fa-newspaper"></i> <p>Tin tức</p>
                             </a>
                         </li>

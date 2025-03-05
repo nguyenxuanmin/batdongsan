@@ -3,7 +3,7 @@ namespace App\Services;
 
 class AdminService
 {
-    public function generate_slug($title) {
+    public function generateSlug($title) {
         $slug = strtolower($title);
         $slug = preg_replace('~[áàạảãâấầậẩẫăắằặẳẵ]~u', 'a', $slug);
         $slug = preg_replace('~[éèẹẻẽêếềệểễ]~u', 'e', $slug);
@@ -18,7 +18,7 @@ class AdminService
         return $slug;
     }
 
-    public function generate_image($image,$folder) {
+    public function generateImage($image,$folder) {
         $message = "";
         $target_dir = $folder;
         if (!file_exists($target_dir)) {
@@ -53,5 +53,16 @@ class AdminService
             $message = "Có lỗi xảy ra khi tải tệp lên.";
             return $message;
         }
+    }
+
+    public function getTagName($url,$list) {
+        $result = "";
+        foreach ($list as $item) {
+            if (strpos($url, $item) !== false) {
+                $result = $item;
+                break;
+            }
+        }
+        return $result;
     }
 }

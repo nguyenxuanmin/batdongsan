@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('list_blog')}}">Tin tức</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('list_'.$tagName)}}">{{$pageName}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$title_page}}</li>
                     </ol>
                 </div>
@@ -38,7 +38,7 @@
                                     <label for="image" class="form-label">Hình ảnh bài viết (<span class="text-danger">Kích thước: 360x225px</span>)</label>
                                     <input type="file" class="form-control mb-3" name="image" id="image" accept="image/*">
                                     <div class="imageContent">
-                                        <img id="imageContent" src="@if (isset($blog) && $blog->image != ""){{asset('library/blog/'.$blog->image)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Image preview" style="max-width: 100%; max-height: 250px;">
+                                        <img id="imageContent" src="@if (isset($blog) && $blog->image != ""){{asset('library/'.$tagName.'/'.$blog->image)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Image preview" style="max-width: 100%; max-height: 250px;">
                                     </div>
                                 </div>
                             </div>
@@ -49,12 +49,13 @@
                             </div>
                             <div class="col-12 mb-3 text-end">
                                 <button class="btn btn-primary">{{$title_page}}</button>
-                                <a href="{{route('list_blog')}}" class="btn btn-dark">Trở lại</a>
+                                <a href="{{route('list_'.$tagName)}}" class="btn btn-dark">Trở lại</a>
                             </div>
                         </div>
                     </div>
                     <input type="hidden" name="action" value="{{$action}}">
                     <input type="hidden" name="id" value="@if (isset($blog)){{$blog->id}}@endif">
+                    <input type="hidden" name="tagName" value="{{$tagName}}">
                 </form>
             </div>
         </div>
@@ -84,7 +85,7 @@
                 var formData = new FormData(this);
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    url: '{{ route('save_blog') }}',
+                    url: '{{ route('save_'.$tagName) }}',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken
                     },
@@ -94,7 +95,7 @@
                     processData: false, 
                     success: function(response) {
                         if (response.success == true) {
-                            location.href = '{{route('list_blog')}}';
+                            location.href = '{{route('list_'.$tagName)}}';
                         }else{
                             alert(response.message);
                         }

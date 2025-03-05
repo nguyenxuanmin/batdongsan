@@ -1,18 +1,18 @@
 @extends('admin.layout.master-page')
 
 @section('title')
-    Tin tức
+    {{$pageName}}
 @endsection
 
 @section('content')
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6"><h3 class="mb-0">Tin tức</h3></div>
+                <div class="col-sm-6"><h3 class="mb-0">{{$pageName}}</h3></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                       <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+                      <li class="breadcrumb-item active" aria-current="page">{{$pageName}}</li>
                     </ol>
                   </div>
             </div>
@@ -21,7 +21,7 @@
     <div class="app-content">
         <div class="container-fluid">
             <div class="mb-3">
-                <a class="btn btn-outline-primary" href="{{route('add_blog')}}" title="Thêm">Thêm bài viết</a>
+                <a class="btn btn-outline-primary" href="{{route('add_'.$tagName)}}" title="Thêm">Thêm bài viết</a>
             </div>
             <table class="table">
                 <thead class="table-dark">
@@ -42,11 +42,11 @@
                     @foreach ($blogs as $key => $blog)
                         <tr>
                             <td valign="middle" align="center">{{$key+1}}</td>
-                            <td valign="middle"><img src="{{asset('library/blog/'.$blog->image)}}" alt="{{$blog->name}}" class="w-75"></td>
+                            <td valign="middle"><img src="{{asset('library/'.$tagName.'/'.$blog->image)}}" alt="{{$blog->name}}" class="w-75"></td>
                             <td valign="middle">{{$blog->name}}</td>
                             <td valign="middle" align="center">{{$blog->created_at->format('d/m/Y');}}</td>
                             <td valign="middle">
-                                <a href="{{route('edit_blog',[$blog->id])}}" class="btn btn-outline-info" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="{{route('edit_'.$tagName,[$blog->id])}}" class="btn btn-outline-info" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <button class="btn btn-outline-danger" title="Xóa" onclick="delete_blog({{$blog->id}});"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
@@ -62,14 +62,14 @@
             if (result) {
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    url: '{{ route('delete_blog') }}',
+                    url: '{{ route('delete_'.$tagName) }}',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken
                     },
                     type: 'POST',
                     data: {id: id},
                     success: function(response) {
-                        location.href = '{{route('list_blog')}}';
+                        location.href = '{{route('list_'.$tagName)}}';
                     },
                     error: function(xhr) {
                         console.log(xhr);

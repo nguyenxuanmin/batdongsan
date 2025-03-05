@@ -10,11 +10,11 @@ use App\Http\Controllers\Admin\BlogController;
 Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('logout');
-    Route::get('/blog', [BlogController::class, 'index'])->name('list_blog');
-    Route::get('/blog/add-blog', [BlogController::class, 'add'])->name('add_blog');
-    Route::post('/blog/save-blog', [BlogController::class, 'save'])->name('save_blog');
-    Route::post('/blog/delete-blog', [BlogController::class, 'delete'])->name('delete_blog');
-    Route::get('/blog/edit-blog/{id}', [BlogController::class, 'edit'])->name('edit_blog');
+    Route::get('/news', [BlogController::class, 'index'])->name('list_news');
+    Route::get('/news/add-blog', [BlogController::class, 'add'])->name('add_news');
+    Route::post('/news/save-blog', [BlogController::class, 'save'])->name('save_news');
+    Route::post('/news/delete-blog', [BlogController::class, 'delete'])->name('delete_news');
+    Route::get('/news/edit-blog/{id}', [BlogController::class, 'edit'])->name('edit_news');
     Route::get('/about_us', [BlogController::class, 'index'])->name('list_about_us');
     Route::get('/about_us/add-about-us', [BlogController::class, 'add'])->name('add_about_us');
     Route::post('/about_us/save-about-us', [BlogController::class, 'save'])->name('save_about_us');
