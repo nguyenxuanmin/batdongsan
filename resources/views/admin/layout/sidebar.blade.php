@@ -1,7 +1,7 @@
 @php
     $currentUrl = $_SERVER['REQUEST_URI'];
-    $list1 = ["news","about_us"];
-    $list2 = ["company"];
+    $list1 = ["news","about_us","service"];
+    $list2 = ["company","setup_column"];
     $isFound1 = false;
     $isFound2 = false;
     foreach ($list1 as $item) {
@@ -38,6 +38,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('list_service')}}" class="nav-link @if (strpos($currentUrl, 'service') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-bell-concierge"></i> <p>Dịch vụ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('list_news')}}" class="nav-link @if (strpos($currentUrl, 'news') !== false) active @endif">
                                 <i class="nav-icon fa-solid fa-newspaper"></i> <p>Tin tức</p>
                             </a>
@@ -53,6 +58,11 @@
                         <li class="nav-item">
                             <a href="" class="nav-link @if (strpos($currentUrl, 'company') !== false) active @endif">
                                 <i class="nav-icon fa-solid fa-users-rectangle"></i> <p>Thông tin công ty</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('setup_column')}}" class="nav-link @if (strpos($currentUrl, 'setup_column') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-list-check"></i> <p>Setup trường dữ liệu</p>
                             </a>
                         </li>
                     </ul>

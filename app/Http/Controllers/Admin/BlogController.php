@@ -13,7 +13,7 @@ class BlogController extends Controller
     {
         $this->adminService = new AdminService;
         $this->currentUrl = $_SERVER['REQUEST_URI'];
-        $this->listTagTable = ["news","about_us"];
+        $this->listTagTable = ["news","about_us","service"];
         $this->tagTable = $this->adminService->getTagName($this->currentUrl,$this->listTagTable);
     }
 
@@ -24,6 +24,9 @@ class BlogController extends Controller
                 break;
             case 'about_us':
                 $pageName = "Về chúng tôi";
+                break;
+            case 'service':
+                $pageName = "Dịch vụ";
                 break;
             default:
                 $pageName = "";
@@ -47,6 +50,9 @@ class BlogController extends Controller
             case 'about_us':
                 $pageName = "Về chúng tôi";
                 break;
+            case 'service':
+                $pageName = "Dịch vụ";
+                break;
             default:
                 $pageName = "";
                 break;
@@ -69,6 +75,9 @@ class BlogController extends Controller
                 break;
             case 'about_us':
                 $pageName = "Về chúng tôi";
+                break;
+            case 'service':
+                $pageName = "Dịch vụ";
                 break;
             default:
                 $pageName = "";

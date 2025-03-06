@@ -6,6 +6,7 @@ use App\Http\Middleware\LoginAuth;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\SetupController;
 
 Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
@@ -20,6 +21,13 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::post('/about_us/save-about-us', [BlogController::class, 'save'])->name('save_about_us');
     Route::post('/about_us/delete-about-us', [BlogController::class, 'delete'])->name('delete_about_us');
     Route::get('/about_us/edit-about-us/{id}', [BlogController::class, 'edit'])->name('edit_about_us');
+    Route::get('/service', [BlogController::class, 'index'])->name('list_service');
+    Route::get('/service/add-service', [BlogController::class, 'add'])->name('add_service');
+    Route::post('/service/save-service', [BlogController::class, 'save'])->name('save_service');
+    Route::post('/service/delete-service', [BlogController::class, 'delete'])->name('delete_service');
+    Route::get('/service/edit-service/{id}', [BlogController::class, 'edit'])->name('edit_service');
+    Route::get('/setup_column', [SetupController::class, 'index'])->name('setup_column');
+    Route::post('/save_setup', [SetupController::class, 'save'])->name('save_setup');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');
