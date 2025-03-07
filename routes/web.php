@@ -26,6 +26,16 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::post('/service/save-service', [BlogController::class, 'save'])->name('save_service');
     Route::post('/service/delete-service', [BlogController::class, 'delete'])->name('delete_service');
     Route::get('/service/edit-service/{id}', [BlogController::class, 'edit'])->name('edit_service');
+    Route::get('/transport', [BlogController::class, 'index'])->name('list_transport');
+    Route::get('/transport/add-transport', [BlogController::class, 'add'])->name('add_transport');
+    Route::post('/transport/save-transport', [BlogController::class, 'save'])->name('save_transport');
+    Route::post('/transport/delete-transport', [BlogController::class, 'delete'])->name('delete_transport');
+    Route::get('/transport/edit-transport/{id}', [BlogController::class, 'edit'])->name('edit_transport');
+    Route::get('/why_choose_us', [BlogController::class, 'index'])->name('list_why_choose_us');
+    Route::get('/why_choose_us/add-why_choose_us', [BlogController::class, 'add'])->name('add_why_choose_us');
+    Route::post('/why_choose_us/save-why_choose_us', [BlogController::class, 'save'])->name('save_why_choose_us');
+    Route::post('/why_choose_us/delete-why_choose_us', [BlogController::class, 'delete'])->name('delete_why_choose_us');
+    Route::get('/why_choose_us/edit-why_choose_us/{id}', [BlogController::class, 'edit'])->name('edit_why_choose_us');
     Route::get('/setup_column', [SetupController::class, 'index'])->name('setup_column');
     Route::post('/save_setup', [SetupController::class, 'save'])->name('save_setup');
 });

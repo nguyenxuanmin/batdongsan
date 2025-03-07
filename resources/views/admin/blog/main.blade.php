@@ -1,19 +1,19 @@
 @extends('admin.layout.master-page')
 
 @section('title')
-    {{$title_page}}
+    {{$titlePage}}
 @endsection
 
 @section('content')
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6"><h3 class="mb-0">{{$title_page}}</h3></div>
+                <div class="col-sm-6"><h3 class="mb-0">{{$titlePage}}</h3></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{route('list_'.$tagName)}}">{{$pageName}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{$title_page}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$titlePage}}</li>
                     </ol>
                 </div>
             </div>
@@ -30,25 +30,31 @@
                                     <label for="title" class="form-label">Tiêu đề bài viết</label>
                                     <input type="text" class="form-control" name="title" value="@if (isset($blog)){{$blog->name}}@endif">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Mô tả bài viết</label>
-                                    <textarea class="form-control" name="description" rows="4">@if (isset($blog)){{$blog->description}}@endif</textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="image" class="form-label">Hình ảnh bài viết (<span class="text-danger">Kích thước: 360x225px</span>)</label>
-                                    <input type="file" class="form-control mb-3" name="image" id="image" accept="image/*">
-                                    <div class="imageContent">
-                                        <img id="imageContent" src="@if (isset($blog) && $blog->image != ""){{asset('library/'.$tagName.'/'.$blog->image)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Image preview" style="max-width: 100%; max-height: 250px;">
+                                @if (count($setupColumn) && explode(',', $setupColumn[0]->list_fill)[0] == 'y')
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Mô tả bài viết</label>
+                                        <textarea class="form-control" name="description" rows="4">@if (isset($blog)){{$blog->description}}@endif</textarea>
                                     </div>
-                                </div>
+                                @endif
+                                @if (count($setupColumn) && explode(',', $setupColumn[0]->list_fill)[1] == 'y')
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Hình ảnh bài viết (<span class="text-danger">Kích thước: 360x225px</span>)</label>
+                                        <input type="file" class="form-control mb-3" name="image" id="image" accept="image/*">
+                                        <div class="imageContent">
+                                            <img id="imageContent" src="@if (isset($blog) && $blog->image != ""){{asset('storage/'.$tagName.'/' . basename($blog->image))}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Image preview" style="max-width: 100%; max-height: 250px;">
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-12 col-md-6"></div>
-                            <div class="col-12 mb-3">
-                                <label for="content" class="form-label">Nội dung bài viết</label>
-                                <textarea name="content" id="content">@if (isset($blog)){{$blog->content}}@endif</textarea>
-                            </div>
+                            @if (count($setupColumn) && explode(',', $setupColumn[0]->list_fill)[2] == 'y')
+                                <div class="col-12 mb-3">
+                                    <label for="content" class="form-label">Nội dung bài viết</label>
+                                    <textarea name="content" id="content">@if (isset($blog)){{$blog->content}}@endif</textarea>
+                                </div>
+                            @endif
                             <div class="col-12 mb-3 text-end">
-                                <button class="btn btn-primary">{{$title_page}}</button>
+                                <button class="btn btn-primary">{{$titlePage}}</button>
                                 <a href="{{route('list_'.$tagName)}}" class="btn btn-dark">Trở lại</a>
                             </div>
                         </div>
@@ -62,23 +68,28 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#content').summernote({
-                height: 300
-            });
+            @if (count($setupColumn) && explode(',', $setupColumn[0]->list_fill)[2] == 'y')
+                $('#content').summernote({
+                    height: 300
+                });
+            @endif
 
-            document.getElementById('image').addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const imageUrl = e.target.result;
-                        const imgElement = document.getElementById('imageContent'); 
-                        imgElement.src = imageUrl; 
-                        imgElement.style.display = 'block';
+            @if (count($setupColumn) && explode(',', $setupColumn[0]
+            ->list_fill)[1] == 'y')
+                document.getElementById('image').addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const imageUrl = e.target.result;
+                            const imgElement = document.getElementById('imageContent'); 
+                            imgElement.src = imageUrl; 
+                            imgElement.style.display = 'block';
+                        }
+                        reader.readAsDataURL(file);
                     }
-                    reader.readAsDataURL(file);
-                }
-            });
+                });
+            @endif
 
             $('#submitForm').on('submit', function(e){
                 e.preventDefault();

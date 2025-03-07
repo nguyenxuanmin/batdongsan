@@ -1,5 +1,6 @@
 <?php 
 namespace App\Services;
+use Illuminate\Support\Facades\Storage;
 
 class AdminService
 {
@@ -20,20 +21,19 @@ class AdminService
 
     public function generateImage($image,$folder) {
         $message = "";
-        $target_dir = $folder;
-        if (!file_exists($target_dir)) {
-            mkdir($target_dir, 0777, true);
-        }
-        $target_file = $target_dir . basename($image['name']);
         $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        
+        $targetFile = $folder.'/'. basename($image['name']);
+        $uploadDir = storage_path('app/public/'.$folder.'/');
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $check = getimagesize($image["tmp_name"]);
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
         if ($check === false) {
             $message = "Tệp không phải là hình ảnh.";
             return $message;
         }
-        if (file_exists($target_file)) {
+        if (Storage::exists($targetFile)) {
             $message = "Xin lỗi, tệp này đã tồn tại.";
             return $message;
         }
@@ -41,13 +41,11 @@ class AdminService
             $message = "Xin lỗi, tệp của bạn quá lớn.";
             return $message;
         }
-
         if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif" && $imageFileType != "webp") {
             $message = "Xin lỗi, chỉ các tệp JPG, JPEG, PNG, GIF, WEBP được phép.";
             return $message;
         }
-        
-        if (move_uploaded_file($image["tmp_name"], $target_file)) {
+        if (move_uploaded_file($image["tmp_name"], $uploadDir . basename($image['name']))) {
             return $message;
         } else {
             $message = "Có lỗi xảy ra khi tải tệp lên.";
@@ -64,5 +62,29 @@ class AdminService
             }
         }
         return $result;
+    }
+
+    public function getPageName($tagTable) {
+        switch ($tagTable) {
+            case 'about_us':
+                $pageName = "Về chúng tôi";
+                break;
+            case 'service':
+                $pageName = "Dịch vụ";
+                break;
+            case 'transport':
+                $pageName = "Vận chuyển";
+                break;
+            case 'why_choose_us':
+                $pageName = "Tại sao chọn chúng tôi";
+                break;
+            case 'news':
+                $pageName = "Tin tức";
+                break;
+            default:
+                $pageName = "";
+                break;
+        }
+        return $pageName;
     }
 }

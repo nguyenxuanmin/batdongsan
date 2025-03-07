@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('setups', function (Blueprint $table) {
             $table->id();
             $table->string('tag_table')->unique();
-            $table->string('list_fill');
+            $table->string('list_fill')->nullable();
             $table->timestamps();
         });
     }

@@ -43,6 +43,12 @@
                                         case 'service':
                                             echo "Dịch vụ";
                                             break;
+                                        case 'transport':
+                                            echo "Vận chuyển";
+                                            break;
+                                        case 'why_choose_us':
+                                            echo "Tại sao chọn chúng tôi";
+                                            break;
                                         default:
                                             echo "";
                                             break;
@@ -50,19 +56,19 @@
                                 @endphp
                             </label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" @if (count($columnFill) and explode(',', $columnFill[0]->list_fill)[0] == 'y') checked @endif name="check_{{$item}}_1" id="check_{{$item}}_1">
+                                <input class="form-check-input" type="checkbox" @if (count($columnFill) && explode(',', $columnFill[0]->list_fill)[0] == 'y') checked @endif name="check_{{$item}}_1" id="check_{{$item}}_1">
                                 <label class="form-check-label" for="check_{{$item}}_1">
                                     Mô tả bài viết
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" @if (count($columnFill) and explode(',', $columnFill[0]->list_fill)[1] == 'y') checked @endif name="check_{{$item}}_2" id="check_{{$item}}_2">
+                                <input class="form-check-input" type="checkbox" @if (count($columnFill) && explode(',', $columnFill[0]->list_fill)[1] == 'y') checked @endif name="check_{{$item}}_2" id="check_{{$item}}_2">
                                 <label class="form-check-label" for="check_{{$item}}_2">
                                     Hình ảnh
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" @if (count($columnFill) and explode(',', $columnFill[0]->list_fill)[2] == 'y') checked @endif name="check_{{$item}}_3" id="check_{{$item}}_3">
+                                <input class="form-check-input" type="checkbox" @if (count($columnFill) && explode(',', $columnFill[0]->list_fill)[2] == 'y') checked @endif name="check_{{$item}}_3" id="check_{{$item}}_3">
                                 <label class="form-check-label" for="check_{{$item}}_3">
                                     Nội dung bài viết
                                 </label>
@@ -92,7 +98,8 @@
                     contentType: false,
                     processData: false, 
                     success: function(response) {
-                        location.href = '{{route('setup_column')}}';
+                        alert("Cập nhật thành công");
+                        location.href = '{{route('admin')}}';
                     },
                     error: function(xhr) {
                         console.log(xhr);

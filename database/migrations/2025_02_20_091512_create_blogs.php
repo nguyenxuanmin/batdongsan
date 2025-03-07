@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->text('description');
-            $table->text('content');
-            $table->string('image');
-            $table->string('tag_table');
+            $table->text('description')->nullable();
+            $table->text('content')->nullable();
+            $table->string('image')->nullable();
+            $table->string('tag_table')->nullable();
             $table->timestamps();
         });
     }

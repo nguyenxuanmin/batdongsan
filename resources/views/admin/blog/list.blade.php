@@ -42,7 +42,11 @@
                     @foreach ($blogs as $key => $blog)
                         <tr>
                             <td valign="middle" align="center">{{$key+1}}</td>
-                            <td valign="middle"><img src="{{asset('library/'.$tagName.'/'.$blog->image)}}" alt="{{$blog->name}}" class="w-75"></td>
+                            <td valign="middle">
+                                @if (count($setupColumn) && explode(',', $setupColumn[0]->list_fill)[2] == 'y')
+                                    <img src="{{asset('storage/'.$tagName.'/' . basename($blog->image))}}" alt="{{$blog->name}}" class="w-75">
+                                @endif
+                            </td>
                             <td valign="middle">{{$blog->name}}</td>
                             <td valign="middle" align="center">{{$blog->created_at->format('d/m/Y');}}</td>
                             <td valign="middle">

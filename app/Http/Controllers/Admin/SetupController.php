@@ -10,7 +10,7 @@ class SetupController extends Controller
 {
     public function __construct()
     {
-        $this->listTagTable = ["news","about_us","service"];
+        $this->listTagTable = ["about_us","service","transport","why_choose_us","news"];
     }
 
     public function index(){
@@ -21,7 +21,7 @@ class SetupController extends Controller
 
     public function save(Request $request){
         foreach ($this->listTagTable as $item) {
-            $checkEmpty = Setup::Where('tag_table',$item)->get();
+            $checkEmpty = Setup::where('tag_table',$item)->get();
             if(count($checkEmpty) == 0){
                 $setup = new Setup();
             }else{
