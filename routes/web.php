@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SetupController;
+use App\Http\Controllers\Admin\CompanyController;
 
 Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
@@ -32,12 +33,14 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::post('/transport/delete-transport', [BlogController::class, 'delete'])->name('delete_transport');
     Route::get('/transport/edit-transport/{id}', [BlogController::class, 'edit'])->name('edit_transport');
     Route::get('/why_choose_us', [BlogController::class, 'index'])->name('list_why_choose_us');
-    Route::get('/why_choose_us/add-why_choose_us', [BlogController::class, 'add'])->name('add_why_choose_us');
-    Route::post('/why_choose_us/save-why_choose_us', [BlogController::class, 'save'])->name('save_why_choose_us');
-    Route::post('/why_choose_us/delete-why_choose_us', [BlogController::class, 'delete'])->name('delete_why_choose_us');
-    Route::get('/why_choose_us/edit-why_choose_us/{id}', [BlogController::class, 'edit'])->name('edit_why_choose_us');
+    Route::get('/why_choose_us/add-why-choose-us', [BlogController::class, 'add'])->name('add_why_choose_us');
+    Route::post('/why_choose_us/save-why-choose-us', [BlogController::class, 'save'])->name('save_why_choose_us');
+    Route::post('/why_choose_us/delete-why-choose-us', [BlogController::class, 'delete'])->name('delete_why_choose_us');
+    Route::get('/why_choose_us/edit-why-choose-us/{id}', [BlogController::class, 'edit'])->name('edit_why_choose_us');
     Route::get('/setup_column', [SetupController::class, 'index'])->name('setup_column');
     Route::post('/save_setup', [SetupController::class, 'save'])->name('save_setup');
+    Route::get('/company', [CompanyController::class, 'index'])->name('company');
+    Route::post('/save_company', [CompanyController::class, 'save'])->name('save_company');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');

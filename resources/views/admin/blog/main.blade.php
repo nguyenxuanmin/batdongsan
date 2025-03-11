@@ -74,8 +74,7 @@
                 });
             @endif
 
-            @if (count($setupColumn) && explode(',', $setupColumn[0]
-            ->list_fill)[1] == 'y')
+            @if (count($setupColumn) && explode(',', $setupColumn[0]->list_fill)[1] == 'y')
                 document.getElementById('image').addEventListener('change', function(event) {
                     const file = event.target.files[0];
                     if (file) {

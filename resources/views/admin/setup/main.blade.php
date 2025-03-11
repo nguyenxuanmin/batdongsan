@@ -76,7 +76,7 @@
                         </div>
                     @endforeach
                     <div class="card-footer text-end">
-                        <button class="btn btn-primary">Save</button>
+                        <button class="btn btn-primary">Lưu</button>
                     </div>
                 </form>
             </div>
