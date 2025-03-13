@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SetupController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Client\ClientController;
 
 Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
@@ -41,6 +42,11 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::post('/save_setup', [SetupController::class, 'save'])->name('save_setup');
     Route::get('/company', [CompanyController::class, 'index'])->name('company');
     Route::post('/save_company', [CompanyController::class, 'save'])->name('save_company');
+    Route::get('/slider', [BlogController::class, 'index'])->name('list_slider');
+    Route::get('/slider/add-slider', [BlogController::class, 'add'])->name('add_slider');
+    Route::post('/slider/save-slider', [BlogController::class, 'save'])->name('save_slider');
+    Route::post('/slider/delete-slider', [BlogController::class, 'delete'])->name('delete_slider');
+    Route::get('/slider/edit-slider/{id}', [BlogController::class, 'edit'])->name('edit_slider');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');
@@ -48,3 +54,5 @@ Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/signup', function () {return view('admin.signup');})->name('signup');
     Route::post('/admin/signup', [AdminController::class, 'signup'])->name('signup');
 });
+
+Route::get('/', [ClientController::class, 'index'])->name('index');

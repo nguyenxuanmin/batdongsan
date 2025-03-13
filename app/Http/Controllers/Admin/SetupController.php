@@ -10,7 +10,7 @@ class SetupController extends Controller
 {
     public function __construct()
     {
-        $this->listTagTable = ["about_us","service","transport","why_choose_us","news"];
+        $this->listTagTable = ["slider","about_us","service","transport","why_choose_us","news"];
     }
 
     public function index(){

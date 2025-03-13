@@ -15,7 +15,7 @@ class BlogController extends Controller
     {
         $this->adminService = new AdminService;
         $this->currentUrl = $_SERVER['REQUEST_URI'];
-        $this->listTagTable = ["about_us","service","transport","why_choose_us","news"];
+        $this->listTagTable = ["slider","about_us","service","transport","why_choose_us","news"];
         $this->tagTable = $this->adminService->getTagName($this->currentUrl,$this->listTagTable);
     }
 

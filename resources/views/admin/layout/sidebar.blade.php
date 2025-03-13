@@ -1,6 +1,6 @@
 @php
     $currentUrl = $_SERVER['REQUEST_URI'];
-    $list1 = ["about_us","service","transport","why_choose_us","news"];
+    $list1 = ["slider","about_us","service","transport","why_choose_us","news"];
     $list2 = ["company","setup_column"];
     $isFound1 = false;
     $isFound2 = false;
@@ -36,6 +36,11 @@
                         <p>Trang chủ <i class="nav-arrow fa-solid fa-chevron-right"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('list_slider')}}" class="nav-link @if (strpos($currentUrl, 'slider') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-image"></i> <p>Slider</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{route('list_about_us')}}" class="nav-link @if (strpos($currentUrl, 'about_us') !== false) active @endif">
                                 <i class="nav-icon fa-solid fa-circle-info"></i></i> <p>Về chúng tôi</p>

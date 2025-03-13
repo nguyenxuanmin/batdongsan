@@ -81,6 +81,9 @@ class AdminService
             case 'news':
                 $pageName = "Tin tức";
                 break;
+            case 'slider':
+                $pageName = "Slider";
+                break;
             default:
                 $pageName = "";
                 break;

@@ -49,6 +49,9 @@
                                         case 'why_choose_us':
                                             echo "Tại sao chọn chúng tôi";
                                             break;
+                                        case 'slider':
+                                            echo "Slider";
+                                            break;
                                         default:
                                             echo "";
                                             break;
