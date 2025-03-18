@@ -104,9 +104,11 @@ a{
     height: 100vh;
 }
 .section-about-us,
-.section-service{
+.section-service,
+.section-transport,
+.section-why-choose-us{
     position: relative;
-    padding: 50px 0;
+    padding: 60px 0;
     scroll-margin-top: 90px;
 }
 .item-about-us{
@@ -166,4 +168,46 @@ a{
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 30px;
+}
+.section-why-choose-us{
+    padding-bottom: 0;
+}
+.item-why-choose-us{
+    display: flex;
+    align-items: start;
+    padding-bottom: 50px;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+.item-why-choose-us-left{
+    position: relative;
+    width: 65px;
+    height: 65px;
+    text-align: center;
+}
+.item-why-choose-us-left span{
+    position: relative;
+    color: #fff;
+    font-size: 26px;
+}
+.item-why-choose-us-left span::before{
+    background-color: #19b7f9;
+    content: "";
+    left: -7px;
+    height: 45px;
+    position: absolute;
+    top: -5 px;
+    transform: rotate(45deg);
+    width: 45px;
+    z-index: -1;
+}
+.item-why-choose-us-right{
+    width: calc(100% - 80px);
+}
+.item-why-choose-us-title{
+    font-size: 18px;
+    font-weight: 700;
+    margin: 15px 0;
+    color: #3c4550;
+    line-height: 1;
 }

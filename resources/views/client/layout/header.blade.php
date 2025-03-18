@@ -12,13 +12,13 @@
             </div>
             <ul class="item-nav">
                 <li>
-                    <a href="#about_us">Về chúng tôi</a>
+                    <a href="#about-us">Về chúng tôi</a>
                 </li>
                 <li>
                     <a href="#service">Dịch vụ</a>
                 </li>
                 <li>
-                    <a href="">Vận chuyển</a>
+                    <a href="#transport">Vận chuyển</a>
                 </li>
                 <li>
                     <a href="">Thống kê</a>

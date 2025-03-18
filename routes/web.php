@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SetupController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\BackgroudController;
 use App\Http\Controllers\Client\ClientController;
 
 Route::group(['middleware' => [AdminAuth::class]], function () {
@@ -47,6 +48,12 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::post('/slider/save-slider', [BlogController::class, 'save'])->name('save_slider');
     Route::post('/slider/delete-slider', [BlogController::class, 'delete'])->name('delete_slider');
     Route::get('/slider/edit-slider/{id}', [BlogController::class, 'edit'])->name('edit_slider');
+    Route::get('/bg_about_us', [BackgroudController::class, 'index'])->name('bg_about_us');
+    Route::post('/save_bg_about_us', [BackgroudController::class, 'save'])->name('save_bg_about_us');
+    Route::get('/bg_why_choose_us', [BackgroudController::class, 'index'])->name('bg_why_choose_us');
+    Route::post('/save_bg_why_choose_us', [BackgroudController::class, 'save'])->name('save_bg_why_choose_us');
+    Route::get('/bg_contact', [BackgroudController::class, 'index'])->name('bg_contact');
+    Route::post('/save_bg_contact', [BackgroudController::class, 'save'])->name('save_bg_contact');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');

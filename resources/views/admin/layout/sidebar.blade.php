@@ -1,11 +1,14 @@
 @php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $list1 = ["slider","about_us","service","transport","why_choose_us","news"];
-    $list2 = ["company","setup_column"];
+    $list2 = ["bg_about_us","bg_why_choose_us","bg_contact"];
+    $list3 = ["company","setup_column"];
     $isFound1 = false;
     $isFound2 = false;
+    $isFound3 = false;
     foreach ($list1 as $item) {
-        if (strpos($currentUrl, $item) !== false) {
+        
+        if (strpos($currentUrl, $item) !== false && mb_strpos($currentUrl,'bg_') === false) {
             $isFound1 = true;
             break;
         }
@@ -13,6 +16,12 @@
     foreach ($list2 as $item) {
         if (strpos($currentUrl, $item) !== false) {
             $isFound2 = true;
+            break;
+        }
+    }
+    foreach ($list3 as $item) {
+        if (strpos($currentUrl, $item) !== false) {
+            $isFound3 = true;
             break;
         }
     }
@@ -70,6 +79,29 @@
                 </li>
                 <li class="nav-item @if ($isFound2 == true) menu-open @endif">
                     <a href="#" class="nav-link @if ($isFound2 == true) active @endif"">
+                        <i class="nav-icon fa-solid fa-images"></i>
+                        <p>Backgroud <i class="nav-arrow fa-solid fa-chevron-right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('bg_about_us')}}" class="nav-link @if (strpos($currentUrl, 'bg_about_us') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-circle-info"></i> <p>Về chúng tôi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('bg_why_choose_us')}}" class="nav-link @if (strpos($currentUrl, 'bg_why_choose_us') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-question"></i> <p>Tại sao chọn chúng tôi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('bg_contact')}}" class="nav-link @if (strpos($currentUrl, 'bg_contact') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-address-card"></i> <p>Liên hệ</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item @if ($isFound3 == true) menu-open @endif">
+                    <a href="#" class="nav-link @if ($isFound3 == true) active @endif"">
                         <i class="nav-icon fa-solid fa-gear"></i>
                         <p>Hệ thống <i class="nav-arrow fa-solid fa-chevron-right"></i></p>
                     </a>

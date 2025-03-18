@@ -84,6 +84,15 @@ class AdminService
             case 'slider':
                 $pageName = "Slider";
                 break;
+            case 'bg_about_us':
+                $pageName = "Backgroud về chúng tôi";
+                break;
+            case 'bg_why_choose_us':
+                $pageName = "Backgroud tại sao chọn chúng tôi";
+                break;
+            case 'bg_contact':
+                $pageName = "Backgroud liên hệ";
+                break;
             default:
                 $pageName = "";
                 break;
