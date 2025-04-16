@@ -80,7 +80,7 @@
             </div>
         </div>
     </section>
-    <section class="section-why-choose-us">
+    <section class="section-why-choose-us" @if (isset($bgWhyChooseUs)) style="background-image: url({{asset('storage/backgroud/bg_why_choose_us/'.$bgWhyChooseUs->image)}});" @endif>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-12">
@@ -108,6 +108,80 @@
                             </div>
                         @endforeach
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="statistical" class="section-statistical" @if (isset($bgStatistical)) style="background-image: url({{asset('storage/backgroud/bg_statistical/'.$bgStatistical->image)}});" @endif>
+        <div class="container">
+            <div class="title-index">
+                <span>Số liệu thống kê</span>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    @foreach ($statistical as $item)
+                        <div class="item-statistical-title">{{$item->name}}</div>
+                        <div class="item-statistical-content">
+                            <div class="item-statistical-desc" style="width: {{$item->description/1000 * 100}}%;">{{$item->description}}</div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="item-statistical-image">
+                        <img src="{{asset('library/client/statistical.webp')}}" alt="Số liệu thống kê" class="object-fix">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-news">
+        <div class="container">
+            <div class="title-index">
+                <span>Tin tức khuyến mãi</span>
+            </div>
+            <div class="my-news">
+                @foreach ($news as $item)
+                    <div class="item-news">
+                        <div class="item-news-image">
+                            <a href="" title="{{$item->name}}">
+                                <img src="{{asset('storage/news/'.$item->image)}}" alt="{{$item->name}}" class="object-fix w-100">
+                            </a>
+                        </div>
+                        <div class="item-news-date">
+                            <span class="item-news-day">{{$item->created_at->format('d/m');}}</span>
+                            <span class="item-news-year">{{$item->created_at->format('Y');}}</span>
+                        </div>
+                        <h3 class="item-news-title">
+                            <a href="">{{$item->name}}</a>
+                        </h3>
+                        <div class="item-news-content">
+                            {{$item->description}}
+                        </div>
+                        <a class="tag-view-more" href="" title="Xem thêm">Xem thêm <i class="fa-solid fa-angles-right"></i></a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="section-contact" @if (isset($bgContact)) style="background-image: url({{asset('storage/backgroud/bg_contact/'.$bgContact->image)}});" @endif>
+        <div class="container">
+            <div class="title-index">
+                <span>Liên hệ</span>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-12">
+                    @if (isset($contact))
+                        <ul class="item-contact">
+                            <li>{{$contact->name}}</li>
+                            <li><i class="fa-solid fa-location-dot"></i> <span><b>Địa chỉ:</b> {{$contact->address}}</span></li>
+                            <li><i class="fa-solid fa-phone"></i> <span><b>Hotline:</b> {{$contact->hotline}}</span></li>
+                            <li><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> {{$contact->email}}</span></li>
+                            <li><i class="fa-solid fa-clock"></i> <span><b>Giờ làm việc:</b> {{$contact->timework}}</span></li>
+                        </ul>
+                    @endif
+                </div>
+                <div class="col-lg-8 col-12">
+
                 </div>
             </div>
         </div>

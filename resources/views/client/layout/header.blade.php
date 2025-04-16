@@ -21,13 +21,13 @@
                     <a href="#transport">Vận chuyển</a>
                 </li>
                 <li>
-                    <a href="">Thống kê</a>
+                    <a href="#statistical">Thống kê</a>
                 </li>
                 <li>
                     <a href="">Tin Tức</a>
                 </li>
                 <li>
-                    <a href="">Liên hệ</a>
+                    <a href="#contact">Liên hệ</a>
                 </li>
             </ul>
         </div>

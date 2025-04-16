@@ -52,6 +52,9 @@
                                         case 'slider':
                                             echo "Slider";
                                             break;
+                                        case 'statistical':
+                                            echo "Thống kê";
+                                            break;
                                         default:
                                             echo "";
                                             break;

@@ -5,6 +5,12 @@ $(document).ready(function() {
         arrows: false,
     });
 
+    $('.my-news').slick({
+        autoplay: false,
+        slidesToShow: 3,
+        arrows: false,
+    });
+
     const header = $('.header');
 
     window.onscroll = function () {

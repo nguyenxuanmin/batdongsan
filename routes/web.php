@@ -54,6 +54,13 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::post('/save_bg_why_choose_us', [BackgroudController::class, 'save'])->name('save_bg_why_choose_us');
     Route::get('/bg_contact', [BackgroudController::class, 'index'])->name('bg_contact');
     Route::post('/save_bg_contact', [BackgroudController::class, 'save'])->name('save_bg_contact');
+    Route::get('/statistical', [BlogController::class, 'index'])->name('list_statistical');
+    Route::get('/statistical/add-statistical', [BlogController::class, 'add'])->name('add_statistical');
+    Route::post('/statistical/save-statistical', [BlogController::class, 'save'])->name('save_statistical');
+    Route::post('/statistical/delete-statistical', [BlogController::class, 'delete'])->name('delete_statistical');
+    Route::get('/statistical/edit-statistical/{id}', [BlogController::class, 'edit'])->name('edit_statistical');
+    Route::get('/bg_statistical', [BackgroudController::class, 'index'])->name('bg_statistical');
+    Route::post('/save_bg_statistical', [BackgroudController::class, 'save'])->name('save_bg_statistical');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');

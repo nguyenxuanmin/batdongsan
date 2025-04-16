@@ -1,7 +1,7 @@
 @php
     $currentUrl = $_SERVER['REQUEST_URI'];
-    $list1 = ["slider","about_us","service","transport","why_choose_us","news"];
-    $list2 = ["bg_about_us","bg_why_choose_us","bg_contact"];
+    $list1 = ["slider","about_us","service","transport","why_choose_us","news","statistical"];
+    $list2 = ["bg_about_us","bg_why_choose_us","bg_contact","bg_statistical"];
     $list3 = ["company","setup_column"];
     $isFound1 = false;
     $isFound2 = false;
@@ -71,6 +71,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('list_statistical')}}" class="nav-link @if (strpos($currentUrl, 'statistical') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-chart-simple"></i> <p>Thống kê</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('list_news')}}" class="nav-link @if (strpos($currentUrl, 'news') !== false) active @endif">
                                 <i class="nav-icon fa-solid fa-newspaper"></i> <p>Tin tức</p>
                             </a>
@@ -91,6 +96,11 @@
                         <li class="nav-item">
                             <a href="{{route('bg_why_choose_us')}}" class="nav-link @if (strpos($currentUrl, 'bg_why_choose_us') !== false) active @endif">
                                 <i class="nav-icon fa-solid fa-question"></i> <p>Tại sao chọn chúng tôi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('bg_statistical')}}" class="nav-link @if (strpos($currentUrl, 'bg_statistical') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-chart-simple"></i> <p>Thống kê</p>
                             </a>
                         </li>
                         <li class="nav-item">

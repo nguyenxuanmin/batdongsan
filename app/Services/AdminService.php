@@ -93,6 +93,12 @@ class AdminService
             case 'bg_contact':
                 $pageName = "Backgroud liên hệ";
                 break;
+            case 'statistical':
+                $pageName = "Thống kê";
+                break;
+            case 'bg_statistical':
+                $pageName = "Backgroud thống kê";
+                break;
             default:
                 $pageName = "";
                 break;
