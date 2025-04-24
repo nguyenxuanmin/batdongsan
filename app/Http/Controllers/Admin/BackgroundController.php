@@ -14,7 +14,7 @@ class BackgroundController extends Controller
     {
         $this->adminService = new AdminService;
         $this->currentUrl = $_SERVER['REQUEST_URI'];
-        $this->listTagTable = ["bg_about_us","bg_why_choose_us","bg_contact","bg_statistical"];
+        $this->listTagTable = ["bg_about_us","bg_why_choose_us","bg_contact","bg_statistical","banner_news"];
         $this->tagTable = $this->adminService->getTagName($this->currentUrl,$this->listTagTable);
     }
 

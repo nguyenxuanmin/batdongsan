@@ -99,6 +99,9 @@ class AdminService
             case 'bg_statistical':
                 $pageName = "Background thống kê";
                 break;
+            case 'banner_news':
+                $pageName = "Banner tin tức";
+                break;
             default:
                 $pageName = "";
                 break;

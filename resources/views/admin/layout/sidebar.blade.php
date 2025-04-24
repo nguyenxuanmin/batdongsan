@@ -1,14 +1,14 @@
 @php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $list1 = ["slider","about_us","service","transport","why_choose_us","news","statistical"];
-    $list2 = ["bg_about_us","bg_why_choose_us","bg_contact","bg_statistical"];
+    $list2 = ["bg_about_us","bg_why_choose_us","bg_contact","bg_statistical","banner_news"];
     $list3 = ["company","setup_column"];
     $isFound1 = false;
     $isFound2 = false;
     $isFound3 = false;
     foreach ($list1 as $item) {
         
-        if (strpos($currentUrl, $item) !== false && mb_strpos($currentUrl,'bg_') === false) {
+        if (strpos($currentUrl, $item) !== false && (mb_strpos($currentUrl,'bg_') === false || mb_strpos($currentUrl,'banner_') === false)) {
             $isFound1 = true;
             break;
         }
@@ -106,6 +106,11 @@
                         <li class="nav-item">
                             <a href="{{route('bg_contact')}}" class="nav-link @if (strpos($currentUrl, 'bg_contact') !== false) active @endif">
                                 <i class="nav-icon fa-solid fa-address-card"></i> <p>Liên hệ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('banner_news')}}" class="nav-link @if (strpos($currentUrl, 'banner_news') !== false) active @endif">
+                                <i class="nav-icon fa-solid fa-newspaper"></i> <p>Banner tin tức</p>
                             </a>
                         </li>
                     </ul>

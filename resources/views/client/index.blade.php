@@ -14,7 +14,7 @@
             @endforeach
         </div>
     </section>
-    <section id="about-us" class="section-about-us">
+    <section id="about-us" class="section-about-us" @if (isset($bgAboutUs)) style="background-image: url({{asset('storage/background/bg_about_us/'.$bgAboutUs->image)}});" @endif>
         <div class="container">
             <div class="title-index">
                 <span>Về chúng tôi</span>

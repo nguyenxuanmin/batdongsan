@@ -159,6 +159,10 @@ a{
     padding: 60px 0;
     scroll-margin-top: 90px;
 }
+.section-about-us{
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .item-about-us{
     padding: 0 20px;
     text-align: center;
@@ -447,6 +451,31 @@ a{
 }
 .footer a:hover{
     color: #fff;
+}
+.item-breadcrumb{
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 470px;
+    position: relative;
+    margin-bottom: 30px;
+}
+.item-breadcrumb-content{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    width: 100%;
+    text-align: center;
+}
+.item-breadcrumb-content a{
+    color: #fff;
+}
+.item-breadcrumb-content a:hover{
+    color: #19b7f9;
+}
+.item-breadcrumb-content span{
+    color: #19b7f9;
 }
 @media (min-width: 1025px) {
     .non-padding-left{

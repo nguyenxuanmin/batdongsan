@@ -15,6 +15,7 @@ class ClientController extends Controller
 {
     public function index(){
         $sliders = Blog::where('tag_table','slider')->get();
+        $bgAboutUs = Background::where('tag_table','bg_about_us')->first();
         $aboutUs = Blog::where('tag_table','about_us')->get();
         $services = Blog::where('tag_table','service')->get();
         $transport = Blog::where('tag_table','transport')->get();
@@ -27,6 +28,7 @@ class ClientController extends Controller
         $contact = Company::first();
         return view('client.index',[
             'sliders' => $sliders,
+            'bgAboutUs' => $bgAboutUs,
             'aboutUs' => $aboutUs,
             'services' => $services,
             'transport' => $transport,
