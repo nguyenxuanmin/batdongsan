@@ -23,10 +23,10 @@
             <div class="card card-primary card-outline mb-4">
                 <form id="submitForm">
                     <div class="card-body">
-                        <label for="backgroud" class="form-label">Backgroud</label>
-                        <input type="file" class="form-control mb-3" name="backgroud" id="backgroud" accept="image/*">
-                        <div class="backgroudContent mb-3">
-                            <img id="backgroudContent" src="@if (count($backgroud) && $backgroud[0]->image != ""){{asset('storage/backgroud/'.$tagName.'/'.$backgroud[0]->image)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Backgroud preview" style="max-width: 100%; max-height: 250px;">
+                        <label for="background" class="form-label">Background</label>
+                        <input type="file" class="form-control mb-3" name="background" id="background" accept="image/*">
+                        <div class="backgroundContent mb-3">
+                            <img id="backgroundContent" src="@if (count($background) && $background[0]->image != ""){{asset('storage/background/'.$tagName.'/'.$background[0]->image)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Background preview" style="max-width: 100%; max-height: 250px;">
                         </div>
                         <div class="text-end">
                             <button class="btn btn-primary">Lưu</button>
@@ -38,13 +38,13 @@
     </div>
     <script>
         $(document).ready(function() {
-            document.getElementById('backgroud').addEventListener('change', function(event) {
+            document.getElementById('background').addEventListener('change', function(event) {
                 const file = event.target.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         const imageUrl = e.target.result;
-                        const imgElement = document.getElementById('backgroudContent'); 
+                        const imgElement = document.getElementById('backgroundContent'); 
                         imgElement.src = imageUrl; 
                         imgElement.style.display = 'block';
                     }

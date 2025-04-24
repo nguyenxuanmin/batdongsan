@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Backgroud;
+use App\Models\Background;
 use App\Services\AdminService;
 use Illuminate\Support\Facades\Storage;
 
-class BackgroudController extends Controller
+class BackgroundController extends Controller
 {
     public function __construct()
     {
@@ -19,40 +19,40 @@ class BackgroudController extends Controller
     }
 
     public function index(){
-        $backgroud = Backgroud::where('tag_table',$this->tagTable)->get();
+        $background = Background::where('tag_table',$this->tagTable)->get();
         $titlePage = $this->adminService->getPageName($this->tagTable);
-        return view('admin.backgroud.main',[
+        return view('admin.background.main',[
             'titlePage' => $titlePage,
             'tagName' => $this->tagTable,
-            'backgroud' => $backgroud
+            'background' => $background
         ]);
     }
 
     public function save(Request $request){
-        if (isset($_FILES["backgroud"])) {
-            $backgroudImage = $_FILES["backgroud"]["name"];
+        if (isset($_FILES["background"])) {
+            $backgroundImage = $_FILES["background"]["name"];
         }else{
-            $backgroudImage = "";
+            $backgroundImage = "";
         }
         
-        if ($backgroudImage == "") {
+        if ($backgroundImage == "") {
             return response()->json([
                 'success' => false,
-                'message' => 'Backgroud không được để trống.'
+                'message' => 'Background không được để trống.'
             ]);
         }
 
-        $checkEmpty = Backgroud::where('tag_table',$this->tagTable)->get();
+        $checkEmpty = Background::where('tag_table',$this->tagTable)->get();
         if(count($checkEmpty) == 0){
-            $backgroud = new Backgroud();
+            $background = new Background();
         }else{
-            $backgroud = Backgroud::find($checkEmpty[0]->id);
-            $imagePath = 'backgroud/'.$this->tagTable.'/'.$checkEmpty[0]->image;
+            $background = Background::find($checkEmpty[0]->id);
+            $imagePath = 'background/'.$this->tagTable.'/'.$checkEmpty[0]->image;
             if (Storage::exists($imagePath)) {
                 Storage::delete($imagePath);
             }
         }
-        $messageError = $this->adminService->generateImage($_FILES["backgroud"],'backgroud/'.$this->tagTable);
+        $messageError = $this->adminService->generateImage($_FILES["background"],'background/'.$this->tagTable);
         if($messageError != ""){
             return response()->json([
                 'success' => false,
@@ -60,9 +60,9 @@ class BackgroudController extends Controller
             ]);
         }
 
-        $backgroud->tag_table = $this->tagTable;
-        $backgroud->image = $backgroudImage;
-        $backgroud->save();
+        $background->tag_table = $this->tagTable;
+        $background->image = $backgroundImage;
+        $background->save();
 
         return response()->json([
             'success' => true,

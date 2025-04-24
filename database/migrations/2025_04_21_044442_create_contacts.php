@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('backgrouds', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('tag_table')->nullable();
-            $table->string('image')->nullable();
+            $table->string('name')->nullable();
+            $table->string('email')->unique();
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('backgrouds');
+        Schema::dropIfExists('contacts');
     }
 };

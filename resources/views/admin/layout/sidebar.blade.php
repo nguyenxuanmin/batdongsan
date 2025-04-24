@@ -85,7 +85,7 @@
                 <li class="nav-item @if ($isFound2 == true) menu-open @endif">
                     <a href="#" class="nav-link @if ($isFound2 == true) active @endif"">
                         <i class="nav-icon fa-solid fa-images"></i>
-                        <p>Backgroud <i class="nav-arrow fa-solid fa-chevron-right"></i></p>
+                        <p>Background <i class="nav-arrow fa-solid fa-chevron-right"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">

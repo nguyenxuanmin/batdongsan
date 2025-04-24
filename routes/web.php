@@ -8,8 +8,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SetupController;
 use App\Http\Controllers\Admin\CompanyController;
-use App\Http\Controllers\Admin\BackgroudController;
+use App\Http\Controllers\Admin\BackgroundController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Client\NewsController;
 
 Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
@@ -48,19 +49,19 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::post('/slider/save-slider', [BlogController::class, 'save'])->name('save_slider');
     Route::post('/slider/delete-slider', [BlogController::class, 'delete'])->name('delete_slider');
     Route::get('/slider/edit-slider/{id}', [BlogController::class, 'edit'])->name('edit_slider');
-    Route::get('/bg_about_us', [BackgroudController::class, 'index'])->name('bg_about_us');
-    Route::post('/save_bg_about_us', [BackgroudController::class, 'save'])->name('save_bg_about_us');
-    Route::get('/bg_why_choose_us', [BackgroudController::class, 'index'])->name('bg_why_choose_us');
-    Route::post('/save_bg_why_choose_us', [BackgroudController::class, 'save'])->name('save_bg_why_choose_us');
-    Route::get('/bg_contact', [BackgroudController::class, 'index'])->name('bg_contact');
-    Route::post('/save_bg_contact', [BackgroudController::class, 'save'])->name('save_bg_contact');
+    Route::get('/bg_about_us', [BackgroundController::class, 'index'])->name('bg_about_us');
+    Route::post('/save_bg_about_us', [BackgroundController::class, 'save'])->name('save_bg_about_us');
+    Route::get('/bg_why_choose_us', [BackgroundController::class, 'index'])->name('bg_why_choose_us');
+    Route::post('/save_bg_why_choose_us', [BackgroundController::class, 'save'])->name('save_bg_why_choose_us');
+    Route::get('/bg_contact', [BackgroundController::class, 'index'])->name('bg_contact');
+    Route::post('/save_bg_contact', [BackgroundController::class, 'save'])->name('save_bg_contact');
     Route::get('/statistical', [BlogController::class, 'index'])->name('list_statistical');
     Route::get('/statistical/add-statistical', [BlogController::class, 'add'])->name('add_statistical');
     Route::post('/statistical/save-statistical', [BlogController::class, 'save'])->name('save_statistical');
     Route::post('/statistical/delete-statistical', [BlogController::class, 'delete'])->name('delete_statistical');
     Route::get('/statistical/edit-statistical/{id}', [BlogController::class, 'edit'])->name('edit_statistical');
-    Route::get('/bg_statistical', [BackgroudController::class, 'index'])->name('bg_statistical');
-    Route::post('/save_bg_statistical', [BackgroudController::class, 'save'])->name('save_bg_statistical');
+    Route::get('/bg_statistical', [BackgroundController::class, 'index'])->name('bg_statistical');
+    Route::post('/save_bg_statistical', [BackgroundController::class, 'save'])->name('save_bg_statistical');
 });
 Route::group(['middleware' => [LoginAuth::class]], function () {
     Route::get('/admin/login', function () {return view('admin.login');})->name('login');
@@ -70,3 +71,5 @@ Route::group(['middleware' => [LoginAuth::class]], function () {
 });
 
 Route::get('/', [ClientController::class, 'index'])->name('index');
+Route::get('/tin-tuc', [NewsController::class, 'index'])->name('news');
+Route::post('/', [ClientController::class, 'contact'])->name('sendContact');

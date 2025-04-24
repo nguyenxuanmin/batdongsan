@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Backgroud extends Model
+class Contact extends Model
 {
     //
 }
