@@ -9,6 +9,6 @@
         <p>Cảm ơn bạn đã gửi liên hệ đến chúng tôi. Chúng tôi sẽ liên hệ cho bạn sớm nhất.</p>
 
         Trân trọng,<br>
-        Min
+        Admin
     </body>
 </html>

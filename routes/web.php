@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\BackgroundController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Client\NewsController;
 use App\Http\Controllers\SystemController;
+use App\Http\Controllers\Admin\ContactController;
 
 Route::group(['middleware' => [SystemAuth::class]], function () {
     Route::group(['middleware' => [AdminAuth::class]], function () {
@@ -68,16 +69,19 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
         Route::post('/save_bg_statistical', [BackgroundController::class, 'save'])->name('save_bg_statistical');
         Route::get('/banner_news', [BackgroundController::class, 'index'])->name('banner_news');
         Route::post('/save_banner_news', [BackgroundController::class, 'save'])->name('save_banner_news');
+        Route::get('/contact', [ContactController::class, 'index'])->name('list_contact');
+        Route::get('/contact/view/{id}', [ContactController::class, 'view'])->name('view_contact');
     });
     Route::group(['middleware' => [LoginAuth::class]], function () {
         Route::get('/admin/login', function () {return view('admin.login');})->name('login');
         Route::post('/admin/login', [AdminController::class, 'login'])->name('login');
-        Route::get('/admin/signup', function () {return view('admin.signup');})->name('signup');
-        Route::post('/admin/signup', [AdminController::class, 'signup'])->name('signup');
+        //Route::get('/admin/signup', function () {return view('admin.signup');})->name('signup');
+        //Route::post('/admin/signup', [AdminController::class, 'signup'])->name('signup');
     });
     Route::get('/', [ClientController::class, 'index'])->name('index');
     Route::post('/', [ClientController::class, 'contact'])->name('sendContact');
     Route::get('/tin-tuc', [NewsController::class, 'index'])->name('news');
+    Route::get('/tin-tuc/{slug}', [NewsController::class, 'detail'])->name('news_detail');
 });
 
 Route::group(['middleware' => [CheckSystemAuth::class]], function () {

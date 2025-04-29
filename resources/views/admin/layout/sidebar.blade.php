@@ -7,7 +7,6 @@
     $isFound2 = false;
     $isFound3 = false;
     foreach ($list1 as $item) {
-        
         if (strpos($currentUrl, $item) !== false && (mb_strpos($currentUrl,'bg_') === false || mb_strpos($currentUrl,'banner_') === false)) {
             $isFound1 = true;
             break;

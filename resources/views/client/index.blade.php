@@ -142,7 +142,7 @@
                 @foreach ($news as $item)
                     <div class="item-news">
                         <div class="item-news-image">
-                            <a href="" title="{{$item->name}}">
+                            <a href="{{route('news_detail',$item->slug)}}" title="{{$item->name}}">
                                 <img src="{{asset('storage/news/'.$item->image)}}" alt="{{$item->name}}" class="object-fix w-100">
                             </a>
                         </div>
@@ -150,12 +150,12 @@
                             <span>{{$item->created_at->format('d/m/Y');}}</span>
                         </div>
                         <h3 class="item-news-title">
-                            <a href="">{{$item->name}}</a>
+                            <a href="{{route('news_detail',$item->slug)}}">{{$item->name}}</a>
                         </h3>
                         <div class="item-news-content">
                             {{$item->description}}
                         </div>
-                        <a class="tag-view-more" href="" title="Xem thêm">Xem thêm <i class="fa-solid fa-angles-right"></i></a>
+                        <a class="tag-view-more" href="{{route('news_detail',$item->slug)}}" title="Xem thêm">Xem thêm <i class="fa-solid fa-angles-right"></i></a>
                     </div>
                 @endforeach
             </div>
@@ -188,7 +188,7 @@
                             <input type="text" name="fmiEmail" placeholder="Email" class="form-control mb-3">
                             <textarea name="fmiContent" rows="5" class="form-control mb-3" placeholder="Nội dung"></textarea>
                             <div class="text-center">
-                                <button class="btn btn-submit-contact">Gửi liên hệ</button>
+                                <button id="btnContact" class="btn btn-submit-contact">Gửi liên hệ</button>
                             </div>
                         </form>
                     </div>
@@ -211,6 +211,9 @@
                 e.preventDefault();
                 var formData = new FormData(this);
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var btn = document.getElementById('btnContact');
+                btn.disabled = true;
+                btn.innerText = 'Đang xử lý...';
                 $.ajax({
                     url: '{{ route('sendContact') }}',
                     headers: {
@@ -240,6 +243,8 @@
                             }, 2000);
                         }
                         $('#showMessage').html(message);
+                        btn.disabled = false;
+                        btn.innerText = 'Gửi liên hệ';
                     },
                     error: function(xhr) {
                         console.log(xhr);

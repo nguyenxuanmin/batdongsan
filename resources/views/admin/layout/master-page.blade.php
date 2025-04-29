@@ -1,5 +1,6 @@
 @php
     $company = DB::select("SELECT * FROM companies");
+    $contacts = DB::select("SELECT * FROM contacts WHERE status = 0 ORDER BY created_at DESC");
 @endphp
 <!DOCTYPE html>
 <html>

@@ -1,8 +1,15 @@
+
+@php
+    $company = DB::select("SELECT * FROM companies");
+@endphp
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        @if (count($company) && $company[0]->favicon != "")
+            <link rel="icon" href="{{asset('storage/company/favicon/'.$company[0]->favicon)}}" type="favicon">
+        @endif
         <title>Đăng nhập</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous"/>
@@ -12,7 +19,7 @@
     <body class="login-page bg-body-secondary">
         <div class="login-box">
             <div class="login-logo">
-                <b>BẤT ĐỘNG SẢN</b>
+                <b>{{$company[0]->name}}</b>
             </div>
             <div class="card">
                 <div class="card-body login-card-body">
@@ -31,8 +38,6 @@
                         </div>
                     </form>
                     <p id="response" class="mb-1"></p>
-                    <p class="mb-1"><a href="#">Quên mật khẩu?</a></p>
-                    <p class="mb-0">Bạn chưa có tài khoản? <a href="{{route('signup')}}" class="text-center">Đăng ký</a></p>
                 </div>
             </div>
         </div>
