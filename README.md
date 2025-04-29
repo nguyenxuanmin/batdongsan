@@ -5,7 +5,7 @@ Yêu cầu:
     + Cài composer mới nhất
     + Cài nodejs mới nhất
     
-Hướng dẫn các bước chạy chạy website:
+Hướng dẫn các bước chạy website:
 
     - Tạo database mới trên phpmyadmin : logistics utf8_unicode_ci
     - Bật cmd clone project về máy: git clone https://github.com/nguyenxuanmin/logistics.git
