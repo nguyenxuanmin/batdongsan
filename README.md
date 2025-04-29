@@ -7,13 +7,13 @@ Yêu cầu:
     
 Hướng dẫn các bước chạy chạy website:
 
-    - Tạo database mới trên phpmyadmin : batdongsan utf8_unicode_ci
-    - Bật cmd clone project về máy: git clone https://github.com/nguyenxuanmin/batdongsan.git
-    - Chạy lệnh: cd batdongsan
+    - Tạo database mới trên phpmyadmin : logistics utf8_unicode_ci
+    - Bật cmd clone project về máy: git clone https://github.com/nguyenxuanmin/logistics.git
+    - Chạy lệnh: cd logistics
     - Chạy lệnh: composer install
     - Chạy lệnh: cp .env.example .env
     - Chỉnh sửa file .env:
-        DB_DATABASE = batdongsan
+        DB_DATABASE = logistics
         DB_USERNAME = root
         DB_PASSWORD =
     - Chạy lệnh: php artisan key:generate
